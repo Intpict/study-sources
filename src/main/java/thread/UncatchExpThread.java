@@ -1,9 +1,7 @@
-package main.java.base.thread;
+package main.java.thread;
 
-import java.util.Formatter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * User: linsen
@@ -21,8 +19,8 @@ public class UncatchExpThread {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Formatter t = new Formatter(System.out);
-                        t.format("test format: %% %d \n", 2);
+                        Formatter t1 = new Formatter(System.out);
+                        t1.format("test format: %% %d \n", 2);
                         throw new RuntimeException("test1");
                     }
                 },
@@ -31,15 +29,41 @@ public class UncatchExpThread {
                 TimeUnit.SECONDS
         );*/
 
-        new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
                while (true) {
                    System.out.println("test exception!");
+                   try {
+                       Thread.sleep(2000);
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   }
                    throw new RuntimeException("test1");
                }
             }
-        }).start();
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                while (i++ < 10) {
+                    System.out.println("test exception!");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        // 一个线程抛出异常不会影响其他线程的执行
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
 
         System.out.println("end!");
     }

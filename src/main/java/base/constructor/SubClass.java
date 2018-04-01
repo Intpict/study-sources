@@ -16,6 +16,7 @@ public class SubClass extends FatherClass {
     }
 
     public void printf() {
+        super.printf();
         System.out.println("sub printf");
     }
 

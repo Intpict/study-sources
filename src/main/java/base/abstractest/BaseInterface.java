@@ -1,4 +1,4 @@
-package main.java.base.abstract_test;
+package main.java.base.abstractest;
 
 public interface BaseInterface {
 

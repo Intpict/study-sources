@@ -1,4 +1,4 @@
-package main.java.base.abstract_test;
+package main.java.base.abstractest;
 
 /**
  * User: linsen
@@ -17,6 +17,10 @@ public abstract class AbstractClass {
      */
     private void privateGo() {
         System.out.println("AbstractClass privateGo()");
+    }
+
+    public final void publicFinalGo() {
+        System.out.println("AbstractClass publicFinalGo()");
     }
 
     public void publicGo() {
