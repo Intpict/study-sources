@@ -2,6 +2,10 @@ package main.java.base.constructor;
 
 public class FatherClass {
 
+    static {
+        System.out.println("father static domain");
+    }
+
     {
         System.out.println("初始化父类成员变量！");
     }

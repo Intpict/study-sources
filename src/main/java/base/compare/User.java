@@ -52,7 +52,7 @@ public class User implements Comparable<User> {
         User[] users = {new User("001", 11), new User("002", 10)};
 
         // 默认排序方式，按照age升序
-        Arrays.sort(users);
+        Arrays.sort(users);ˇ
         for(User user : users) {
             System.out.println(user);
         }

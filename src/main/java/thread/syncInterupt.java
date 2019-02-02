@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Time: 下午8:00
  * Description:
  */
-public class syncinterupt {
+public class syncInterupt {
 
     private static Object mutux = new Object();
 
@@ -36,6 +36,7 @@ public class syncinterupt {
                 */
 
                 // 直接使用lock无法被中断
+                // lock.lock();
                 lock.lockInterruptibly();
                 if (!flag) {
                     flag = true;
@@ -60,7 +61,7 @@ public class syncinterupt {
 
         future2 = service.submit(new SyncTask());
         System.out.println("线程2被启动~");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         future2.cancel(true);
 

@@ -1,7 +1,10 @@
 package main.java.thread;
 
+import java.util.Formatter;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User: linsen
@@ -11,23 +14,33 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 public class UncatchExpThread {
 
-    private static ScheduledExecutorService excutor = Executors.newSingleThreadScheduledExecutor();
+    private static ExecutorService excutor = Executors.newSingleThreadExecutor();
 
     public static void main(String[] args) throws Exception {
-        // 如果异常未捕获,线程将会停止工作
-        /*excutor.scheduleAtFixedRate(
+        // execute如果异常未捕获,线程将会停止工作,对于单线程池，会重启新的线程执行后面的任务
+        excutor.execute (
                 new Runnable() {
                     @Override
                     public void run() {
+                        System.out.println(Thread.currentThread());
+                        Formatter t1 = new Formatter(System.out);
+                        t1.format("test format: %% %d \n", 1);
+                        throw new RuntimeException("test1");
+                    }
+                }
+        );
+        // submit会抓住异常，因此线程不会挂
+        excutor.submit (
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println(Thread.currentThread());
                         Formatter t1 = new Formatter(System.out);
                         t1.format("test format: %% %d \n", 2);
                         throw new RuntimeException("test1");
                     }
-                },
-                0,
-                2,
-                TimeUnit.SECONDS
-        );*/
+                }
+        );
 
         Thread t1 = new Thread(new Runnable() {
             @Override

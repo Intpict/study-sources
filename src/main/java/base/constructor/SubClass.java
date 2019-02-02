@@ -2,6 +2,10 @@ package main.java.base.constructor;
 
 public class SubClass extends FatherClass {
 
+    static {
+        System.out.println("sub static domain");
+    }
+
     {
         System.out.println("初始化子类成员变量！");
     }
